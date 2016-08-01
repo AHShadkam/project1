@@ -1,5 +1,5 @@
 IF OBJECT_ID('[AD_Customer].[dbo].[NPJXTCN_GOLDEN]','U') IS NOT NULL DROP TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN];
- 
+GO
      
 CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 (
@@ -26,7 +26,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
 );
- 
+GO 
  
  
  
