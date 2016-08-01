@@ -21,8 +21,8 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_ZIP_1 varchar(6),
       Address_ZIP_2   varchar(6),
       Email_Primary varchar(50),
-      Email_Secondary varchar(50),
-      Email_Crt_ts varchar(100),
+ --     Email_Secondary varchar(50),
+      Email_Ins_ts varchar(10),
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
 );
