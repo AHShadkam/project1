@@ -73,4 +73,4 @@ SELECT  [cn_cust_key]
         ,[CUS_EML_AD]
         ,[CRT_TS]
         ,[cn_tel_no]
-FROM  [AD_Customer].[dbo].[NPJXTCN_STG] ;
+FROM  [AD_Customer].[dbo].[NPJXTCN_RAO] ;
