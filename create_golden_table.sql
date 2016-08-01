@@ -22,7 +22,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_ZIP_2   varchar(6),
       Email_Primary varchar(50),
       Email_Secondary varchar(50),
-      Email_create_time varchar(100),
+      Email_Crt_ts varchar(100),
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
 );
@@ -51,7 +51,7 @@ INSERT INTO [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       ,Address_ZIP_2
       ,Email_Primary
 --    ,Email_Secondary
-      ,Email_create_time
+      ,Email_Crt_ts
       ,Phone_Primary
 --    ,Phone_Secondary
 )
