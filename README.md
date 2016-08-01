@@ -19,7 +19,7 @@ create the golden table (use the create_golden_table.sqlfile)
 
 **Step 2:**  
 clean up data (use clean_up.sql file)  
-* trim the leading and end spaces
+* trim the leading and end spaces (All data)
 * remove some special characters (Name_last)
 * remove digits (Name_last)  
 * remove leading hyphens (Address_line2)  
