@@ -51,7 +51,7 @@ INSERT INTO [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       ,Address_ZIP_2
       ,Email_Primary
 --    ,Email_Secondary
-      ,Email_Crt_ts
+      ,Email_Ins_ts
       ,Phone_Primary
 --    ,Phone_Secondary
 )
@@ -71,6 +71,7 @@ SELECT  [cn_cust_key]
         ,[cn_zip_pc]
         ,[cn_zip_sector_seg]
         ,[CUS_EML_AD]
-        ,[CRT_TS]
+--        ,[CRT_TS]
+        ,CONVERT(date,LEFT([CRT_TS],10))
         ,[cn_tel_no]
 FROM  [AD_Customer].[dbo].[NPJXTCN_RAO] ;
