@@ -10,6 +10,8 @@ clean_up.sql
 
 consolidate.sql  
 
+find_duplication.sql
+
 server_connection.R  
 
 * * *  
