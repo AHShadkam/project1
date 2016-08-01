@@ -25,7 +25,7 @@ clean up data (use clean_up.sql file)
 * remove leading hyphens (Address_line2)  
 
 **step3:**  
-consolidate emails and populate the secondary_email column.  
+consolidate emails and populate the email_secondary column.  
 
 
 
