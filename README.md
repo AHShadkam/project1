@@ -31,6 +31,21 @@ clean up data (use clean_up.sql file)
 **step3:**  
 consolidate emails and populate the email_secondary column.  
 
+**step4:**
+populate secondary emails (use populate_secondary_email.sql file)
+remove the Customer Number duplication
+* create auxiliary column [RowNumber]
+* for accounts having email, partition by Cust_no Order by Email_Ins_ts and save the email insertion order in RowNumer column.
+* insert the second latest email into Email_secondary
+* Delete the rows which have RowNumber>1 (removes Cust_no duplication)
+* Delete the RowNumber column  
+
+
+
+
+
+ 
+
 
 
 
