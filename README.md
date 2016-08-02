@@ -31,7 +31,8 @@ clean up data (use clean_up.sql file)
 **Step 3:**  
 consolidate emails and populate the email_secondary column.  
 
-**Step 4:**
+**Step 4:**  
+
 populate secondary emails (use populate_secondary_email.sql file)
 remove the Customer Number duplication
 * create auxiliary column [RowNumber]
