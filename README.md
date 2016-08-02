@@ -28,10 +28,10 @@ clean up data (use clean_up.sql file)
 * remove digits (Name_last)  
 * remove leading hyphens (Address_line2)  
 
-**step3:**  
+**Step 3:**  
 consolidate emails and populate the email_secondary column.  
 
-**step4:**
+**Step 4:**
 populate secondary emails (use populate_secondary_email.sql file)
 remove the Customer Number duplication
 * create auxiliary column [RowNumber]
