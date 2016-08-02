@@ -18,6 +18,8 @@ server_connection.R
 ## procedure  
 **Step 1:**  
 create the golden table (use the create_golden_table.sqlfile)  
+* convert email addresses to Upper case
+* convert Email insertion time TYPE from varchar to date  
 
 **Step 2:**  
 clean up data (use clean_up.sql file)  
