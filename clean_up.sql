@@ -69,24 +69,24 @@ GO
 
 
 /** clean up leading space **/
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM([Name_prefix])
-                                               ,[Name_last] = LTRIM([Name_last])
-                                               ,[Name_first] = LTRIM([Name_first])
-                                               ,[Name_suffix] = LTRIM([Name_suffix])
-                                               ,[Address_number] = LTRIM([Address_number])
-                                               ,[Address_Street_Prefix]=LTRIM([Address_Street_Prefix])
-                                               ,[Address_street_name]=LTRIM([Address_street_name])
-                                               ,[Address_street_suffix]=LTRIM([Address_street_suffix])
-                                               ,[Address_street_modifier]=LTRIM([Address_street_modifier])
-                                               ,[Address_BoxNubmer]=LTRIM([Address_BoxNubmer])
-                                               ,[Address_unitnumber]=LTRIM([Address_unitnumber])
-                                               ,[Address_Line2]=LTRIM([Address_Line2])
-					       ,[Address_zip_1]=LTRIM([Address_zip_1])
-					       ,[Address_zip_2]=LTRIM([Address_zip_2])
-					       ,[Email_Primary]=LTRIM([Email_Primary])
-		                               ,[Email_Secondary]=LTRIM([Email_Secondary])
-					       ,[Phone_Primary]=LTRIM([Phone_Primary])
-					       ,[Phone_Secondary]=LTRIM([Phone_Secondary]);
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Name_prefix]))
+                                               ,[Name_last] = LTRIM(RTRIM([Name_last]))
+                                               ,[Name_first] = LTRIM(RTRIM([Name_first]))
+                                               ,[Name_suffix] = LTRIM(RTRIM([Name_suffix]))
+                                               ,[Address_number] = LTRIM(RTRIM([Address_number]))
+                                               ,[Address_Street_Prefix]=LTRIM(RTRIM([Address_Street_Prefix]))
+                                               ,[Address_street_name]=LTRIM(RTRIM([Address_street_name]))
+                                               ,[Address_street_suffix]=LTRIM(RTRIM([Address_street_suffix]))
+                                               ,[Address_street_modifier]=LTRIM(RTRIM([Address_street_modifier]))
+                                               ,[Address_BoxNubmer]=LTRIM(RTRIM([Address_BoxNubmer]))
+                                               ,[Address_unitnumber]=LTRIM(RTRIM([Address_unitnumber]))
+                                               ,[Address_Line2]=LTRIM(RTRIM([Address_Line2]))
+					       ,[Address_zip_1]=LTRIM(RTRIM([Address_zip_1]))
+					       ,[Address_zip_2]=LTRIM(RTRIM([Address_zip_2]))
+					       ,[Email_Primary]=LTRIM(RTRIM([Email_Primary]))
+		                               ,[Email_Secondary]=LTRIM(RTRIM([Email_Secondary]))
+					       ,[Phone_Primary]=LTRIM(RTRIM([Phone_Primary]))
+					       ,[Phone_Secondary]=LTRIM(RTRIM([Phone_Secondary]));
 
 /** clean Name_last from digits and special characters **/
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveSpecialCharacters([Name_last]);
