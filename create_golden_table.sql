@@ -21,7 +21,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_ZIP_1 varchar(6),
       Address_ZIP_2   varchar(6),
       Email_Primary varchar(50),
- --     Email_Secondary varchar(50),
+      Email_Secondary varchar(50),
       Email_Ins_ts datetime2,
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
@@ -70,7 +70,7 @@ SELECT  [cn_cust_key]
         ,[cn_addr_line_2]
         ,[cn_zip_pc]
         ,[cn_zip_sector_seg]
-        ,[CUS_EML_AD]
+        ,UPPER([CUS_EML_AD])
 --        ,[CRT_TS]
         ,CONVERT(datetime2,[CRT_TS])
         ,[cn_tel_no]
