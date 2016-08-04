@@ -34,3 +34,13 @@ SELECT dX.[Cust_no]
 		AND dX.[Address_number]=dY.[Address_number]
 		AND dX.[Address_ZIP_1]=dY.[Address_ZIP_1])
 ORDER BY dX.[Cust_no];
+
+/** second technique to find the duplication **/
+/** after query, copy/paste into excel and sum the "counts" column**/
+SELECT Name_last + Name_first + Address_number + Address_ZIP_1,COUNT(1)
+FROM [AD_Customer].[dbo].NPJXTCN_GOLDEN
+WHERE LEN(Name_last)!=0
+--AND LEN(Name_first)!=0
+AND LEN(Address_ZIP_1) !=0
+GROUP BY Name_last + Name_first + Address_number + Address_ZIP_1
+HAVING COUNT(1) > 2;
