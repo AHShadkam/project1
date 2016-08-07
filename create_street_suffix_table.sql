@@ -3,8 +3,8 @@ GO
      
 CREATE TABLE [AD_Customer].[dbo].[Street_Suffix_list]
 (
-      Street_Suffix varchar(50),
-      Abbreviation varchar(10)
+      Street_Suffix varchar(50) NOT NULL PRIMARY KEY,
+      Abbreviation varchar(10) NOT NULL
 );
 GO 
 
