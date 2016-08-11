@@ -115,3 +115,17 @@ AND dbo.CountWords(Address_Line2) = 5
 AND dbo.ReturnStringPart(Address_Line2,3) IN (SELECT Street_Suffix FROM AD_Customer.dbo.Street_Suffix_list)
 AND dbo.ReturnStringPart(Address_Line2,4) IN ('APT','APT.');
 GO
+
+
+/** 3word highway **/
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
+SET
+	   Address_number=dbo.ReturnStringPart(Address_Line2,1),
+	   Address_Street_Name='HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,3)
+WHERE len(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 3
+AND dbo.ReturnStringPart(Address_Line2,2) IN ('HWY','HIGHWAY');
+GO
+
+
