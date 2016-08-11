@@ -40,7 +40,7 @@ End;
 GO
 
 
-
+/** 3 word, with street suffix at word(3)**/
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
 SET Address_number=dbo.ReturnStringPart(Address_Line2,1),
 	Address_Street_Name=dbo.ReturnStringPart(Address_Line2,2),
@@ -55,6 +55,7 @@ AND dbo.ReturnStringPart(Address_Line2,3) IN (SELECT Street_Suffix FROM AD_Custo
 GO
 
 
+/** 4 word, with street suffix at word(4)  and street_prefix at word(2) **/
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
 SET
 	Address_number=dbo.ReturnStringPart(Address_Line2,1),
