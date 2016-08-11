@@ -39,4 +39,19 @@ Begin
 End;
 GO
 
-select dbo.ReturnStringPart('amir 1 shad *',4);
+
+UPDATE T1 
+SET Address_number=dbo.ReturnStringPart(T1.Address_Line2,1),
+	Address_Street_Name=dbo.ReturnStringPart(T1.Address_Line2,2),
+	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
+						   FROM AD_Customer.dbo.Street_Suffix_list T2
+						   WHERE dbo.ReturnStringPart(T1.Address_Line2,3) = T2.Street_Suffix
+						   )
+FROM AD_Customer.dbo.NPJXTCN_GOLDEN T1
+WHERE len(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 3
+AND dbo.ReturnStringPart(Address_Line2,3) IN (SELECT Street_Suffix FROM AD_Customer.dbo.Street_Suffix_list);
+GO
+
+
