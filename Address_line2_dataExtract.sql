@@ -77,7 +77,7 @@ AND dbo.ReturnStringPart(Address_Line2,2) IN ('e','e.','east','w','w.','west','n
 GO
 
 
-
+/** 4word, no street prefix **/
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
 SET
 	Address_number=dbo.ReturnStringPart(Address_Line2,1),
