@@ -40,14 +40,14 @@ End;
 GO
 
 
-UPDATE T1 
-SET Address_number=dbo.ReturnStringPart(T1.Address_Line2,1),
-	Address_Street_Name=dbo.ReturnStringPart(T1.Address_Line2,2),
+
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
+SET Address_number=dbo.ReturnStringPart(Address_Line2,1),
+	Address_Street_Name=dbo.ReturnStringPart(Address_Line2,2),
 	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
 						   FROM AD_Customer.dbo.Street_Suffix_list T2
-						   WHERE dbo.ReturnStringPart(T1.Address_Line2,3) = T2.Street_Suffix
+						   WHERE dbo.ReturnStringPart(Address_Line2,3) = T2.Street_Suffix
 						   )
-FROM AD_Customer.dbo.NPJXTCN_GOLDEN T1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 3
