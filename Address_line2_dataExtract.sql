@@ -129,3 +129,17 @@ AND dbo.ReturnStringPart(Address_Line2,2) IN ('HWY','HIGHWAY');
 GO
 
 
+/** 4word highway 'US','USA','STATE' **/
+/** remember to clean # at the end from Street_name **/
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
+SET
+	Address_number=dbo.ReturnStringPart(Address_Line2,1),
+	Address_Street_Name=CASE WHEN dbo.ReturnStringPart(Address_Line2,2) IN ('US','USA') THEN 'US HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,4)
+			         WHEN dbo.ReturnStringPart(Address_Line2,2) = 'STATE' THEN 'STATE HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,4)
+		                 END		
+WHERE LEN(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 4
+AND dbo.ReturnStringPart(Address_Line2,3) IN ('HWY','HIGHWAY')
+AND dbo.ReturnStringPart(Address_Line2,2) IN ('US','STATE');
+GO
