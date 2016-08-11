@@ -76,3 +76,24 @@ AND dbo.ReturnStringPart(Address_Line2,4) IN (SELECT Street_Suffix FROM AD_Custo
 AND dbo.ReturnStringPart(Address_Line2,2) IN ('e','e.','east','w','w.','west','n','n.','no.','north','s','s.','so.','south');
 GO
 
+
+
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
+SET
+	Address_number=dbo.ReturnStringPart(Address_Line2,1),
+	Address_Street_Name=CASE WHEN dbo.ReturnStringPart(Address_Line2,2) LIKE '%[0-9]%' THEN dbo.ReturnStringPart(Address_Line2,3)
+				 WHEN dbo.ReturnStringPart(Address_Line2,2) LIKE '%[/:"#-]%' THEN dbo.ReturnStringPart(Address_Line2,3)
+				 WHEN dbo.ReturnStringPart(Address_Line2,2) = 'APT' THEN ''
+				 WHEN LEN(dbo.ReturnStringPart(Address_Line2,2)) < 2 THEN dbo.ReturnStringPart(Address_Line2,3)
+				 ELSE dbo.ReturnStringPart(Address_Line2,2)+' '+dbo.ReturnStringPart(Address_Line2,3)
+				 END,
+	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
+				FROM AD_Customer.dbo.Street_Suffix_list T2
+				WHERE dbo.ReturnStringPart(Address_Line2,4) = T2.Street_Suffix
+				)
+WHERE len(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 4
+AND dbo.ReturnStringPart(Address_Line2,4) IN (SELECT Street_Suffix FROM AD_Customer.dbo.Street_Suffix_list)
+AND dbo.ReturnStringPart(Address_Line2,2) NOT IN ('e','e.','east','w','w.','west','n','n.','no.','north','s','s.','so.','south');
+GO
