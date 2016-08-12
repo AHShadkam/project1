@@ -41,10 +41,17 @@ remove the Customer Number duplication
 * Delete the rows which have RowNumber>1 (removes Cust_no duplication)
 * Delete the RowNumber column  
 
-**Step 5:** 
+**Step 5:**   
 Extract Address_Line2 data and populate the corresponding address fields.  
 1- Create a table for Street_suffixes and thier abbreviations. (create_street_suffix_table.sql)  
-2- Extract Address_Line2 data.
+2- Extract Address_Line2 data.  
+
+**Step 6:**  
+Remove the # sign from Address_street_name.
+Remove leading and trailing hyphen sign from Address_street_name.
+Remove leading and trailing comma from Address_street_name.
+(clean_up_2.sql)
+
 
 
 
