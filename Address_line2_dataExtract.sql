@@ -162,3 +162,17 @@ AND dbo.ReturnStringPart(Address_Line2,2) IN ('HWY','HIGHWAY')
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,3)) = 1
 AND dbo.ReturnStringPart(Address_Line2,4) IN ('e','e.','east','w','w.','west','n','n.','no.','north','s','s.','so.','south');
 GO
+
+
+
+/** 3word Route **/
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
+SET
+		Address_number=dbo.ReturnStringPart(Address_Line2,1),
+		Address_Street_Name='ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,3)
+WHERE len(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 3
+AND dbo.ReturnStringPart(Address_Line2,2) IN ('RT','ROUTE');
+GO
+
