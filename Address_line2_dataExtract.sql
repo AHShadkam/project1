@@ -211,3 +211,22 @@ AND dbo.ReturnStringPart(Address_Line2,2) IN ('RT','ROUTE')
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,3)) = 1
 AND dbo.ReturnStringPart(Address_Line2,4) IN ('e','e.','east','w','w.','west','n','n.','no.','north','s','s.','so.','south');
 GO
+
+
+/** 4word, ROUTE with Modifier (4) **/
+UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
+SET
+	Address_number=dbo.ReturnStringPart(Address_Line2,1),
+	Address_Street_Name='ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,3),
+	Address_Street_Modifier=CASE WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('e','e.','east') THEN 'E' 
+				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('w','w.','west') THEN 'W'
+				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('n','n.','no.','north') THEN 'N'
+				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('s','s.','so.','south') THEN 'S'
+				END    	
+WHERE LEN(address_line2) != 0
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
+AND dbo.CountWords(Address_Line2) = 4
+AND dbo.ReturnStringPart(Address_Line2,2) IN ('RT','ROUTE')
+AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,3)) = 1
+AND dbo.ReturnStringPart(Address_Line2,4) IN ('e','e.','east','w','w.','west','n','n.','no.','north','s','s.','so.','south');
+GO
