@@ -176,3 +176,4 @@ AND dbo.CountWords(Address_Line2) = 3
 AND dbo.ReturnStringPart(Address_Line2,2) IN ('RT','ROUTE');
 GO
 
+
