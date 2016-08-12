@@ -41,6 +41,12 @@ remove the Customer Number duplication
 * Delete the rows which have RowNumber>1 (removes Cust_no duplication)
 * Delete the RowNumber column  
 
+**Step 5:** 
+Extract Address_Line2 data and populate the corresponding address fields.  
+1- Create a table for Street_suffixes and thier abbreviations. (create_street_suffix_table.sql)  
+2- Extract Address_Line2 data.
+
+
 
 
 
