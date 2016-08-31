@@ -52,6 +52,8 @@ Remove leading and trailing hyphen sign from Address_street_name.
 Remove leading and trailing comma from Address_street_name.
 (clean_up_2.sql)
 
+**At this stage we gave the data to others**
+
 
 
 
