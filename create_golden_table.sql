@@ -21,12 +21,12 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_City varchar(30),
       Address_ZIP_1 varchar(6),
       Address_ZIP_2   varchar(6),
-      CN_date_effect datetime2,
-      CN_last_name_chg_dt datetime2,
-      CN_purge_dt datetime2,
+      CN_date_effect date,
+      CN_last_name_chg_dt date,
+      CN_purge_dt date,
       Email_Primary varchar(50),
       Email_Secondary varchar(50),
-      Email_Ins_ts datetime2,
+      Email_Ins_ts date,
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
 );
@@ -79,10 +79,10 @@ SELECT  [cn_cust_key]
         ,[cn_town]
         ,[cn_zip_pc]
         ,[cn_zip_sector_seg]
-        ,CONVERT(datetime2,[cn_date_effect])
-        ,CONVERT(datetime2,[lst_nm_chg_dt])
-        ,CONVERT(datetime2,[purge_dt])
+        ,CONVERT(date,[cn_date_effect])
+        ,CONVERT(date,[lst_nm_chg_dt])
+        ,CONVERT(date,[purge_dt])
         ,UPPER([CUS_EML_AD])
-        ,CONVERT(datetime2,[CRT_TS])
+        ,CONVERT(date,[CRT_TS])
         ,[cn_tel_no]
 FROM  [AD_Customer].[dbo].[NPJXTCN_RAO] ;
