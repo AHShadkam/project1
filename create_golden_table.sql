@@ -18,7 +18,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_BoxNubmer varchar(10),
       Address_UnitNumber varchar(6),
       Address_Line2 varchar(30),
-      Address_Town varchar(30),
+      Address_City varchar(30),
       Address_ZIP_1 varchar(6),
       Address_ZIP_2   varchar(6),
       CN_date_effect datetime2,
@@ -51,7 +51,7 @@ INSERT INTO [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       ,Address_BoxNubmer
       ,Address_UnitNumber
       ,Address_Line2
-      ,Address_Town
+      ,Address_City
       ,Address_ZIP_1
       ,Address_ZIP_2
       ,CN_date_effect 
