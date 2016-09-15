@@ -44,7 +44,7 @@ remove the Customer Number duplication
 **Step 5:**   
 Extract Address_Line2 data and populate the corresponding address fields.  
 1- Create a table for Street_suffixes and thier abbreviations. (create_street_suffix_table.sql)  
-2- Extract Address_Line2 data.  
+2- Extract Address_Line2 data. (Address_line2_dataExtract.sql)  
 
 **Step 6:**  
 Remove the # sign from Address_street_name.
