@@ -50,7 +50,14 @@ Remove leading and trailing hyphen sign from Address_street_name.
 Remove leading and trailing comma from Address_street_name.
 (clean_up_2.sql)
 
-**At this stage we gave the data to others**
+**Step 6**
+* HouseHolding: populate Assoc_HH_Rec (house_holding.sql)
+* Individual duplicate association (individual_duplicate.sql)
+
+**Step 7**
+* phone validation: delete invalid phone numbers (phone_number_validation.sql)
+
+ **At this stage we gave the data to others**
 
 
 
