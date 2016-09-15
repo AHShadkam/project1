@@ -14,9 +14,8 @@ SELECT [Cust_no]
       ,ROW_NUMBER() OVER (PARTITION BY [Cust_no] ORDER BY [Email_Ins_ts] DESC) AS rn
 FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 WHERE len([Email_Primary]) != 0
---ORDER BY [Cust_no]
 )
---DELETE FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
+
 UPDATE t1
 SET [RowNumber] = t2.rn
 FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN] AS t1
@@ -25,7 +24,7 @@ FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN] AS t1
     ON (t1.Cust_no=t2.Cust_no AND t1.Email_Ins_ts=t2.Email_Ins_ts);
 GO
 
-
+/** populate the Email_secondary with second most resent email **/
 WITH AUS AS(
 SELECT [Cust_no] 
       ,[Email_Primary]
@@ -33,9 +32,8 @@ SELECT [Cust_no]
       ,ROW_NUMBER() OVER (PARTITION BY [Cust_no] ORDER BY [Email_Ins_ts] DESC) AS rn
 FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 WHERE len([Email_Primary]) != 0
---ORDER BY [Cust_no]
 )
---DELETE FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
+
 UPDATE t1
 SET [Email_Secondary] = t3.[Email_Primary]
 FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN] AS t1
