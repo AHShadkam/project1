@@ -89,9 +89,12 @@ update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Nam
 					       ,[Phone_Secondary]=LTRIM(RTRIM([Phone_Secondary]));
 
 /** clean Name_last from digits and special characters **/
+/** clean Name_first from digits  **/
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveSpecialCharacters([Name_last]);
 GO
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveDigitCharacters([Name_last]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveDigitCharacters([Name_first]);
 GO
 
 /** clean leading hyphen in Address_line2 **/
