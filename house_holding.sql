@@ -11,7 +11,8 @@ AND LEN(Address_ZIP_1) !=0
 UPDATE T1
 SET Assoc_HH_Rec = HH.HH_ID
 FROM AD_Customer.dbo.NPJXTCN_GOLDEN AS T1
-INNER JOIN HH ON T1.Cust_no=HH.Cust_no
+INNER JOIN HH ON T1.Cust_no=HH.Cust_no;
+GO
 
 /** populate the remaining householding rows with their customer_number **/
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
