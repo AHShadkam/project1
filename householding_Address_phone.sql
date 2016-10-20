@@ -6,11 +6,11 @@ GO
 With my_data AS
 (
 SELECT Phone_Primary,
-    Count(DISTINCT HH_updated) AS CountOfHH
+    Count(DISTINCT Assoc_HH_Rec_1) AS CountOfHH
 FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 Where LEN(Phone_Primary) !=0 
 GROUP BY [Phone_Primary]
-HAVING (((Count(DISTINCT [HH_updated]))>1)) AND (((Count(DISTINCT [HH_updated]))<10))
+HAVING (((Count(DISTINCT [Assoc_HH_Rec_1]))>1)) AND (((Count(DISTINCT [Assoc_HH_Rec_1]))<10))
 ),
 
 my_data2 AS
@@ -19,8 +19,8 @@ Select
 T1.Cust_no,
 T1.Assoc_Ind_Rec,
 T1.Assoc_HH_Rec,
-T1.Ind_updated,
-T1.HH_updated,
+T1.Assoc_Ind_Rec_1,
+T1.Assoc_HH_Rec_1,
 MIN(HH_updated) OVER (PARTITION BY T1.Address_number + T1.Address_ZIP_1 + T1.Phone_Primary) AS phone_HH2,
 T1.Name_last,
 T1.Name_first,
@@ -41,7 +41,7 @@ Update T2
 SET T2.Assoc_HH_Rec_2=my_data2_distinct.phone_HH2 
 from AD_Customer.dbo.NPJXTCN_GOLDEN AS T2
 INNER Join (Select distinct Assoc_HH_Rec_1, phone_HH2 from my_data2 ) AS my_data2_distinct 
-ON T2.Assoc_HH_Rec_1=my_data2_distinct.HH_updated
+ON T2.Assoc_HH_Rec_1=my_data2_distinct.Assoc_HH_Rec_1
 Where my_data2_distinct.phone_HH2 is not null;
 
 
