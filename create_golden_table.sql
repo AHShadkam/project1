@@ -19,6 +19,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       Address_UnitNumber varchar(6),
       Address_Line2 varchar(30),
       Address_City varchar(30),
+      Address_State varchar(2),
       Address_ZIP_1 varchar(6),
       Address_ZIP_2   varchar(6),
       CN_date_effect date,
@@ -52,6 +53,7 @@ INSERT INTO [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       ,Address_UnitNumber
       ,Address_Line2
       ,Address_City
+      ,Address_State
       ,Address_ZIP_1
       ,Address_ZIP_2
       ,CN_date_effect 
@@ -77,6 +79,7 @@ SELECT  [cn_cust_key]
         ,[cn_unit_no]
         ,[cn_addr_line_2]
         ,[cn_town]
+        ,[cn_st_prov]
         ,[cn_zip_pc]
         ,[cn_zip_sector_seg]
         ,CONVERT(date,[cn_date_effect])
