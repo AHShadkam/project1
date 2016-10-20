@@ -59,8 +59,9 @@ ALTER TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 DROP COLUMN [RowNumber];
 GO
 
-
-
+/** set the cust_no as the primary_key **/
+ALTER TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
+ADD PRIMARY KEY (cust_no);
 
 
 
