@@ -5,6 +5,7 @@ SELECT
   ,Name_last+Address_number+Address_Zip_1 AS combination
 FROM [AD_Customer].[dbo].NPJXTCN_GOLDEN
 WHERE LEN(Name_last)!=0
+AND LEN(Address_number)!=0 
 AND LEN(Address_ZIP_1) !=0
 )
 
