@@ -40,6 +40,11 @@ End;
 GO
 
 
+/** add flag column to track the extracted Address_line 2 **/ 
+ALTER TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
+ADD [address_line2_extracted_flag] bit NOT NULL default 0;
+
+
 /** 3 word, with street suffix at word(3)**/
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
 SET Address_number=dbo.ReturnStringPart(Address_Line2,1),
@@ -47,7 +52,8 @@ SET Address_number=dbo.ReturnStringPart(Address_Line2,1),
 	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
 			       FROM AD_Customer.dbo.Street_Suffix_list T2
 			       WHERE dbo.ReturnStringPart(Address_Line2,3) = T2.Street_Suffix
-			       )
+			       ),
+	address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 3
@@ -68,7 +74,8 @@ SET
 	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
 				FROM AD_Customer.dbo.Street_Suffix_list T2
 				WHERE dbo.ReturnStringPart(Address_Line2,4) = T2.Street_Suffix
-				)
+				),
+	address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
@@ -90,7 +97,8 @@ SET
 	Address_Street_Suffix=(SELECT UPPER(T2.Abbreviation) 
 				FROM AD_Customer.dbo.Street_Suffix_list T2
 				WHERE dbo.ReturnStringPart(Address_Line2,4) = T2.Street_Suffix
-				)
+				),
+	address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
@@ -108,7 +116,8 @@ SET
 	                        FROM AD_Customer.dbo.Street_Suffix_list T2
 				WHERE dbo.ReturnStringPart(Address_Line2,3) = T2.Street_Suffix
 				),
-	Address_UnitNumber=dbo.ReturnStringPart(Address_Line2,5)
+	Address_UnitNumber=dbo.ReturnStringPart(Address_Line2,5),
+	address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 5
@@ -121,7 +130,8 @@ GO
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
 SET
 	   Address_number=dbo.ReturnStringPart(Address_Line2,1),
-	   Address_Street_Name='HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,3)
+	   Address_Street_Name='HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,3),
+	   address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 3
@@ -136,7 +146,8 @@ SET
 	Address_number=dbo.ReturnStringPart(Address_Line2,1),
 	Address_Street_Name=CASE WHEN dbo.ReturnStringPart(Address_Line2,2) IN ('US','USA') THEN 'US HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,4)
 			         WHEN dbo.ReturnStringPart(Address_Line2,2) = 'STATE' THEN 'STATE HIGHWAY'+' '+dbo.ReturnStringPart(Address_Line2,4)
-		                 END		
+		                 END,
+	address_line2_extracted_flag = 1
 WHERE LEN(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
@@ -154,7 +165,8 @@ SET
 		                        WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('w','w.','west') THEN 'W'
 		                        WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('n','n.','no.','north') THEN 'N'
 		                        WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('s','s.','so.','south') THEN 'S'
-		                   END
+		                   END,
+       address_line2_extracted_flag = 1
 WHERE LEN(Address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
@@ -169,7 +181,8 @@ GO
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN
 SET
 		Address_number=dbo.ReturnStringPart(Address_Line2,1),
-		Address_Street_Name='ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,3)
+		Address_Street_Name='ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,3),
+		address_line2_extracted_flag = 1
 WHERE len(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 3
@@ -184,7 +197,8 @@ SET
 	Address_Street_Name=CASE WHEN dbo.ReturnStringPart(Address_Line2,2)='COUNTY' THEN 'COUNTY ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,4)
 	                         WHEN dbo.ReturnStringPart(Address_Line2,2) ='STATE' THEN 'STATE ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,4)
 	                         WHEN dbo.ReturnStringPart(Address_Line2,2) ='RURAL' THEN 'RURAL ROUTE'+' '+dbo.ReturnStringPart(Address_Line2,4)		 
-		            END
+		            END,
+	address_line2_extracted_flag = 1
 WHERE LEN(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,4)) = 1
@@ -203,7 +217,8 @@ SET
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('w','w.','west') THEN 'W'
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('n','n.','no.','north') THEN 'N'
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('s','s.','so.','south') THEN 'S'
-				END    	
+				END,
+	address_line2_extracted_flag = 1
 WHERE LEN(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
@@ -222,7 +237,8 @@ SET
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN ('w','w.','west') THEN 'W'
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('n','n.','no.','north') THEN 'N'
 				     WHEN dbo.ReturnStringPart(Address_Line2,4) IN	('s','s.','so.','south') THEN 'S'
-				END    	
+				END,
+	address_line2_extracted_flag = 1
 WHERE LEN(address_line2) != 0
 AND ISNUMERIC(dbo.ReturnStringPart(Address_Line2,1)) = 1
 AND dbo.CountWords(Address_Line2) = 4
