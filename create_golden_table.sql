@@ -3,7 +3,7 @@ GO
      
 CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
 (
-      Cust_no int,
+      Cust_no int NOT NULL,
       Assoc_Ind_Rec int,
       Assoc_HH_Rec int,
       Name_prefix varchar(4),
