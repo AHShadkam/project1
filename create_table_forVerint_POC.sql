@@ -85,7 +85,9 @@ select
       ,TT2.[Address_ZIP_1]
       ,TT2.[Address_ZIP_2]
       ,TT2.[Email_Primary]
+      ,TT2.[Email_Secondary]
       ,TT2.[Phone_Primary]
+      ,TT2.[Phone_Secondary]
 from (select distinct Assoc_HH_Rec_2 from my_100K) AS TT1
 inner join AD_Customer.dbo.NPJXTCN_GOLDEN AS TT2
 ON TT1.Assoc_HH_Rec_2=TT2.Assoc_HH_Rec_2;
