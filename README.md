@@ -58,11 +58,14 @@ Remove leading and trailing comma from Address_street_name.
 * phone validation: delete invalid phone numbers (phone_number_validation.sql)
 
 **Step 8**
-* phone consolidation - IND: use name.first and name.last + phone to consolidate individuals.(Ind_name_phone.sql)
-* phone consolidation - HH: use name.first and name.last + phone to consolidate Households.(householding_name_phone.sql)
+* phone consolidation - IND: use name.first and name.last + phone to consolidate individuals.(Ind_name_phone.sql)  
+it adds "Assoc_Ind_Rec_1" column.
+* phone consolidation - HH: use name.first and name.last + phone to consolidate Households.(householding_name_phone.sql)  
+it adds "Assoc_HH_Rec_1" column.
 
 **Step 9**
-* phone consolidation - HH: Address + phone to consolidate households.(householding_address_phone.sql)
+* phone consolidation - HH: Address + phone to consolidate households.(householding_address_phone.sql)  
+it adds "Assoc_HH_Rec_2" column.
 
  **At this stage we gave the data to others**
 
