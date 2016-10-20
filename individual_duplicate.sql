@@ -8,6 +8,7 @@ SELECT
 FROM [AD_Customer].[dbo].NPJXTCN_GOLDEN
 WHERE LEN(Name_last)!=0
 AND LEN(Name_first)!=0
+AND LEN(Address_number)!=0
 AND LEN(Address_ZIP_1) !=0
 )
 
