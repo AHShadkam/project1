@@ -27,7 +27,7 @@ CREATE TABLE [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
       CN_purge_dt date,
       Email_Primary varchar(50),
       Email_Secondary varchar(50),
-      Email_Ins_ts date,
+      Email_Ins_ts datetime2,
       Phone_Primary varchar(10),
       Phone_Secondary varchar(10)
 );
@@ -86,6 +86,6 @@ SELECT  [cn_cust_key]
         ,CONVERT(date,[lst_nm_chg_dt])
         ,CONVERT(date,[purge_dt])
         ,UPPER([CUS_EML_AD])
-        ,CONVERT(date,[CRT_TS])
+        ,CONVERT(datetime2,[CRT_TS])
         ,[cn_tel_no]
 FROM  [AD_Customer].[dbo].[NPJXTCN_RAO] ;
