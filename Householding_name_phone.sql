@@ -21,7 +21,7 @@ Select
 T1.Cust_no,
 T1.Assoc_Ind_Rec,
 T1.Assoc_HH_Rec,
-MIN(Assoc_HH_Rec) OVER (PARTITION BY T1.Name_last + T1.Name_first + T1.Phone_Primary) AS phone_HH,
+MIN(T1.Assoc_HH_Rec) OVER (PARTITION BY T1.Name_last + T1.Name_first + T1.Phone_Primary) AS phone_HH,
 T1.Name_last,
 T1.Name_first,
 T1.Address_number,
