@@ -81,6 +81,7 @@ update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Nam
                                                ,[Address_BoxNubmer]=LTRIM(RTRIM([Address_BoxNubmer]))
                                                ,[Address_unitnumber]=LTRIM(RTRIM([Address_unitnumber]))
                                                ,[Address_Line2]=LTRIM(RTRIM([Address_Line2]))
+					       ,[Address_State]=LTRIM(RTRIM([Address_State]))
 					       ,[Address_zip_1]=LTRIM(RTRIM([Address_zip_1]))
 					       ,[Address_zip_2]=LTRIM(RTRIM([Address_zip_2]))
 					       ,[Email_Primary]=LTRIM(RTRIM([Email_Primary]))
