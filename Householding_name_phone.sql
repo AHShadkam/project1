@@ -41,9 +41,11 @@ AND LEN(Name_first) !=0
 Update T2
 SET Assoc_HH_Rec_1=my_data2_distinct.phone_HH
 from AD_Customer.dbo.NPJXTCN_GOLDEN AS T2
-INNER Join (Select distinct Assoc_HH_Rec, phone_HH from my_data2 ) AS my_data2_distinct 
+--INNER Join (Select distinct Assoc_HH_Rec, phone_HH from my_data2 ) AS my_data2_distinct 
+INNER Join (Select distinct g.Assoc_HH_Rec, g.phone_HH, COUNT(*) over (PARTITION by g.phone_HH) as count from my_data2 as g) AS my_data2_distinct 
 ON T2.Assoc_HH_Rec=my_data2_distinct.Assoc_HH_Rec
-Where phone_HH is not null;
+Where phone_HH is not null
+And my_data2_distinct.count >1;
 GO
 
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
