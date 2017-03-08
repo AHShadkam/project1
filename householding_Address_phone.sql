@@ -40,10 +40,12 @@ AND LEN(Address_ZIP_1) !=0
 Update T2
 SET T2.Assoc_HH_Rec_2=my_data2_distinct.phone_HH2 
 from AD_Customer.dbo.NPJXTCN_GOLDEN AS T2
-INNER Join (Select distinct Assoc_HH_Rec_1, phone_HH2 from my_data2 ) AS my_data2_distinct 
+--INNER Join (Select distinct Assoc_HH_Rec_1, phone_HH2 from my_data2 ) AS my_data2_distinct 
+INNER Join (Select distinct g.Assoc_HH_Rec_1, g.phone_HH2, COUNT(*) over (PARTITION by g.phone_HH2) as count from my_data2 as g) AS my_data2_distinct
 ON T2.Assoc_HH_Rec_1=my_data2_distinct.Assoc_HH_Rec_1
-Where my_data2_distinct.phone_HH2 is not null;
-
+Where my_data2_distinct.phone_HH2 is not null
+And my_data2_distinct.count >1;
+GO
 
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
 SET Assoc_HH_Rec_2 = Assoc_HH_Rec_1
