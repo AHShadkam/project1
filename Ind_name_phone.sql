@@ -20,7 +20,6 @@ Address_City,
 Address_ZIP_1,
 Phone_Primary
 From AD_Customer.dbo.NPJXTCN_GOLDEN 
-
 Where 
 LEN(Name_last) > 1
 AND LEN(Name_first) !=0
