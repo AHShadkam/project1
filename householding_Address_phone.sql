@@ -3,48 +3,35 @@ ADD [Assoc_HH_Rec_2] INT NULL;
 GO
 
 
-With my_data AS
-(
-SELECT Phone_Primary,
-    Count(DISTINCT Assoc_HH_Rec_1) AS CountOfHH
-FROM [AD_Customer].[dbo].[NPJXTCN_GOLDEN]
-Where LEN(Phone_Primary) !=0 
-GROUP BY [Phone_Primary]
-HAVING (((Count(DISTINCT [Assoc_HH_Rec_1]))>1)) AND (((Count(DISTINCT [Assoc_HH_Rec_1]))<10))
-),
-
-my_data2 AS
+With my_data2 AS
 (
 Select 
-T1.Cust_no,
-T1.Assoc_Ind_Rec,
-T1.Assoc_HH_Rec,
-T1.Assoc_Ind_Rec_1,
-T1.Assoc_HH_Rec_1,
-MIN(T1.Assoc_HH_Rec_1) OVER (PARTITION BY T1.Address_number + T1.Address_ZIP_1 + T1.Phone_Primary) AS phone_HH2,
-T1.Name_last,
-T1.Name_first,
-T1.Address_number,
-T1.Address_Street_Name,
-T1.Address_City,
-T1.Address_ZIP_1,
-T1.Phone_Primary
-From AD_Customer.dbo.NPJXTCN_GOLDEN AS T1 
-	INNER JOIN my_data ON T1.Phone_Primary=my_data.Phone_Primary
+Cust_no,
+Assoc_Ind_Rec,
+Assoc_HH_Rec,
+Assoc_Ind_Rec_1,
+Assoc_HH_Rec_1,
+MIN(Assoc_HH_Rec_1) OVER (PARTITION BY Address_number + Address_ZIP_1 + Phone_Primary) AS phone_HH2,
+Name_last,
+Name_first,
+Address_number,
+Address_Street_Name,
+Address_City,
+Address_ZIP_1,
+Phone_Primary
+From AD_Customer.dbo.NPJXTCN_GOLDEN
 Where 
 LEN(Address_number) != 0 
 AND LEN(Address_ZIP_1) !=0
+AND LEN(Phone_Primary) !=0
 )
 
 
 Update T2
 SET T2.Assoc_HH_Rec_2=my_data2_distinct.phone_HH2 
 from AD_Customer.dbo.NPJXTCN_GOLDEN AS T2
---INNER Join (Select distinct Assoc_HH_Rec_1, phone_HH2 from my_data2 ) AS my_data2_distinct 
-INNER Join (Select distinct g.Assoc_HH_Rec_1, g.phone_HH2, COUNT(*) over (PARTITION by g.phone_HH2) as count from my_data2 as g) AS my_data2_distinct
-ON T2.Assoc_HH_Rec_1=my_data2_distinct.Assoc_HH_Rec_1
-Where my_data2_distinct.phone_HH2 is not null
-And my_data2_distinct.count >1;
+INNER Join (Select distinct Assoc_HH_Rec_1, phone_HH2 from my_data2 where Assoc_HH_Rec_1 != phone_HH2) AS my_data2_distinct
+ON T2.Assoc_HH_Rec_1=my_data2_distinct.Assoc_HH_Rec_1;
 GO
 
 UPDATE AD_Customer.dbo.NPJXTCN_GOLDEN 
