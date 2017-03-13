@@ -31,7 +31,7 @@ AS
 Begin
 
     Declare @KeepValues as varchar(50)
-    Set @KeepValues = '%[/\.+*;:@_,?#=}{-]%'
+    Set @KeepValues = '%[/\.+*;:)(&@_,?#=}{-]%'
     /** hyphen, caret and ] are tricky
         hyphen should be always after [ or before ]  **/
     While PatIndex(@KeepValues, @Temp) > 0
@@ -94,6 +94,8 @@ update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Nam
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveSpecialCharacters([Name_last]);
 GO
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveDigitCharacters([Name_last]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveSpecialCharacters([Name_first]);
 GO
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveDigitCharacters([Name_first]);
 GO
