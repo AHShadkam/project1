@@ -86,6 +86,23 @@ GO
 
 
 
+/** clean Name_last from digits and special characters **/
+/** clean Name_first from digits  **/
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveSpecialCharacters([Name_last]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveDigitCharacters([Name_last]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveSpecialCharacters([Name_first]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveDigitCharacters([Name_first]);
+GO
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveLeadingApostrophes([Name_first]);
+GO
+/** clean leading hyphen in Address_line2 **/
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Address_Line2] = dbo.RemoveLeadingHyphens([Address_Line2])
+WHERE [Address_Line2] LIKE '[-]%';
+GO
+
 /** clean up leading space **/
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Name_prefix]))
                                                ,[Name_last] = LTRIM(RTRIM([Name_last]))
@@ -106,24 +123,5 @@ update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_prefix] = LTRIM(RTRIM([Nam
 		                               ,[Email_Secondary]=LTRIM(RTRIM([Email_Secondary]))
 					       ,[Phone_Primary]=LTRIM(RTRIM([Phone_Primary]))
 					       ,[Phone_Secondary]=LTRIM(RTRIM([Phone_Secondary]));
-
-/** clean Name_last from digits and special characters **/
-/** clean Name_first from digits  **/
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveSpecialCharacters([Name_last]);
-GO
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_last] = dbo.RemoveDigitCharacters([Name_last]);
-GO
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveSpecialCharacters([Name_first]);
-GO
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveDigitCharacters([Name_first]);
-GO
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveLeadingApostrophes([Name_first]);
-GO
-/** clean leading hyphen in Address_line2 **/
-update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Address_Line2] = dbo.RemoveLeadingHyphens([Address_Line2])
-WHERE [Address_Line2] LIKE '[-]%';
-GO
-
-
 
           
