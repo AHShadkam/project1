@@ -63,6 +63,24 @@ Begin
 End;
 GO
 
+/* Removes all leading apostrophe from string */
+IF OBJECT_ID('[dbo].[RemoveLeadingApostrophes]') IS NOT NULL
+   DROP FUNCTION [dbo].[RemoveLeadingApostrophes];
+GO
+Create Function [dbo].[RemoveLeadingApostrophes](@Temp VarChar(100))
+Returns VarChar(100)
+AS
+Begin
+
+    Declare @KeepValues as varchar(50)
+    Set @KeepValues = '['']%'
+    While PatIndex(@KeepValues, @Temp) > 0
+        Set @Temp = Stuff(@Temp, PatIndex(@KeepValues, @Temp), 1, '')
+
+    Return @Temp
+End;
+GO
+
 /*** End of functions ***/
 /************************/
 
@@ -99,7 +117,8 @@ update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveSpecial
 GO
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveDigitCharacters([Name_first]);
 GO
-
+update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Name_first] = dbo.RemoveLeadingApostrophes([Name_first]);
+GO
 /** clean leading hyphen in Address_line2 **/
 update [AD_Customer].[dbo].[NPJXTCN_GOLDEN] set [Address_Line2] = dbo.RemoveLeadingHyphens([Address_Line2])
 WHERE [Address_Line2] LIKE '[-]%';
