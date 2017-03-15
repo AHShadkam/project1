@@ -13,7 +13,7 @@ GO
 -- Create date: <March,14,2017>
 -- Description:	<This procedure does the Associations needed for golden records, no cleaning is included here.>
 -- =============================================
-ALTER PROCEDURE [dbo].[Amir_Assoc-speed-test]
+CREATE PROCEDURE [dbo].[Amir_Assoc-speed-test]
 
 AS
 BEGIN
