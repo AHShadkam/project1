@@ -23,7 +23,7 @@ Assoc_HH_Rec_1_AUX1 INT NULL,
 Assoc_HH_Rec_1_AUX2 INT NULL,
 Assoc_HH_Rec_2_AUX1 INT NULL 
 ```
-
+-- Refresh the tables in server
 -- Run Stroed procedure
 ```sql
 Exec [CustomerID].[dbo].[Amir_Assoc_speed_test]
