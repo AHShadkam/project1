@@ -1,3 +1,9 @@
+--The First_name and Last_name cleanup has 5 steps:
+--1. Remove MR. , MRS. , MS.
+--2. Remove leading non-alphabets
+--3. Remove Trailing non-alphabets
+--4. Remove digits 
+--5. Remove special characters except "&", "'", "."
 
 --Functions --
 --------------
