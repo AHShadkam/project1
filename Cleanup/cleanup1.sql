@@ -66,9 +66,12 @@ Begin
 End;
 
 
+-- main body --
 
--- Remove MR. , MRS. , MS. from fist-name --
---------------------------------------------
+-- 1) First name:
+
+-- 1.1) Remove MR. , MRS. , MS. from fist-name 
+
 select top 1000 cn_name_1st,stuff(cn_name_1st,1,4,'')
 FROM [CustomerID].[NPJ].NPJXTCN with (NOLOCK)
 where cn_name_1st like 'MR.%'
@@ -80,3 +83,5 @@ where cn_name_1st like 'MS.%'
 select top 1000 cn_name_1st,stuff(cn_name_1st,1,5,'')
 FROM [CustomerID].[NPJ].NPJXTCN with (NOLOCK)
 where cn_name_1st like 'MRS.%'
+
+
