@@ -3,7 +3,7 @@
 --2. Remove leading non-alphabets
 --3. Remove Trailing non-alphabets
 --4. Remove digits 
---5. Remove special characters except "&", "'", "."
+--5. Remove special characters including ( ÿ ) except "&", "'", "."
 
 --Functions --
 --------------
