@@ -1,7 +1,6 @@
 USE [CustomerID];
 GO
 -- Function dbo.RemoveLeadingNonAlphabet --
-
 IF OBJECT_ID('[dbo].[RemoveLeadingNonAlphabet]') IS NOT NULL
    DROP FUNCTION [dbo].[RemoveLeadingNonAlphabet];
 GO
@@ -50,6 +49,7 @@ Begin
 End;
 GO
 
+-- Function dbo.RemoveSpecialCharacters execpt for ampersad,single quote, Dot
 IF OBJECT_ID('[dbo].[RemoveSpecialCharacters]') IS NOT NULL
    DROP FUNCTION [dbo].[RemoveSpecialCharacters];
 GO
@@ -65,7 +65,7 @@ Begin
     		Set @Temp = Stuff(@Temp, PatIndex(@KeepValues, @Temp), 1, '') 
 	Return @Temp
 End;
-
+GO
 
 -- main body --
 
@@ -80,29 +80,30 @@ where [Name_first] like 'MR.%'
 OR [Name_first] like 'MS.%';
 GO
 
-
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
 SET [Name_first] = stuff([Name_first],1,5,'')
 FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
 where [Name_first] like 'MRS.%';
 GO
 
-
+-- 1.2) Remove leading non-alphabets from fist-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_first] = dbo.dbo.RemoveLeadingNonAlphabet([Name_first])
 WHERE [Name_first] LIKE '[^A-Z]%';
 GO
-
+-- 1.3) Remove trailing non-alphabets from fist-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_first] = dbo.dbo.RemoveTrailingNonAlphabet([Name_first])
 WHERE [Name_first] LIKE '%[^A-Z]';
 GO
 
+-- 1.4) Remove digits from fist-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_first] = dbo.dbo.RemoveDigitCharacters([Name_first])
 WHERE [Name_first] LIKE '%[0-9]%';
 GO
 
+-- 1.5) Remove special characters except &'. from fist-name
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_first] = dbo.RemoveSpecialCharacters([Name_first])
 WHERE [Name_first] LIKE '%[/\+*;:)(@_,?#=}{]%';
