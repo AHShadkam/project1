@@ -67,7 +67,7 @@ Returns VarChar(100)
 AS
 Begin 
 	Declare @KeepValues as varchar(50)
-	Set @KeepValues = '%[/\+*;:)(@_,?#=}{]%'
+	Set @KeepValues = '%[ÿ/\+*;:)(@_,?#=}{]%'
 	/** hyphen, caret and ] are tricky
     	hyphen should be always after [ or before ]  **/
 	While PatIndex(@KeepValues, @Temp) > 0
@@ -116,7 +116,7 @@ GO
 -- 1.5) Remove special characters except &'. from first-name
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_first] = dbo.RemoveSpecialCharacters([Name_first])
-WHERE [Name_first] LIKE '%[/\+*;:)(@_,?#=}{]%';
+WHERE [Name_first] LIKE '%[ÿ/\+*;:)(@_,?#=}{]%';
 GO
 
 
@@ -157,5 +157,5 @@ GO
 -- 2.5) Remove special characters except &'. from last-name
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_last] = dbo.RemoveSpecialCharacters([Name_last])
-WHERE [Name_last] LIKE '%[/\+*;:)(@_,?#=}{]%';
+WHERE [Name_last] LIKE '%[ÿ/\+*;:)(@_,?#=}{]%';
 GO
