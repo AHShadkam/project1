@@ -1,3 +1,7 @@
+
+--Functions --
+--------------
+
 USE [CustomerID];
 GO
 -- Function dbo.RemoveLeadingNonAlphabet --
@@ -33,7 +37,6 @@ End;
 GO
 
 -- Function dbo.RemoveDigitCharacters --
-----------------------------------------
 IF OBJECT_ID('[dbo].[RemoveDigitCharacters]') IS NOT NULL
    DROP FUNCTION [dbo].[RemoveDigitCharacters];
 GO
@@ -68,6 +71,7 @@ End;
 GO
 
 -- main body --
+---------------
 
 -- 1) First name:
 
