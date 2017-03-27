@@ -1,4 +1,5 @@
-
+USE [CustomerID];
+GO
 -- Function dbo.RemoveLeadingNonAlphabet --
 
 IF OBJECT_ID('[dbo].[RemoveLeadingNonAlphabet]') IS NOT NULL
@@ -72,16 +73,37 @@ End;
 
 -- 1.1) Remove MR. , MRS. , MS. from fist-name 
 
-select top 1000 cn_name_1st,stuff(cn_name_1st,1,4,'')
-FROM [CustomerID].[NPJ].NPJXTCN with (NOLOCK)
-where cn_name_1st like 'MR.%'
-
-select top 1000 cn_name_1st,stuff(cn_name_1st,1,4,'')
-FROM [CustomerID].[NPJ].NPJXTCN with (NOLOCK)
-where cn_name_1st like 'MS.%'
-
-select top 1000 cn_name_1st,stuff(cn_name_1st,1,5,'')
-FROM [CustomerID].[NPJ].NPJXTCN with (NOLOCK)
-where cn_name_1st like 'MRS.%'
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
+SET [Name_first] = stuff([Name_first],1,4,'')
+FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
+where [Name_first] like 'MR.%'
+OR [Name_first] like 'MS.%';
+GO
 
 
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
+SET [Name_first] = stuff([Name_first],1,5,'')
+FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
+where [Name_first] like 'MRS.%';
+GO
+
+
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
+SET [Name_first] = dbo.dbo.RemoveLeadingNonAlphabet([Name_first])
+WHERE [Name_first] LIKE '[^A-Z]%';
+GO
+
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
+SET [Name_first] = dbo.dbo.RemoveTrailingNonAlphabet([Name_first])
+WHERE [Name_first] LIKE '%[^A-Z]';
+GO
+
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
+SET [Name_first] = dbo.dbo.RemoveDigitCharacters([Name_first])
+WHERE [Name_first] LIKE '%[0-9]%';
+GO
+
+UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
+SET [Name_first] = dbo.RemoveSpecialCharacters([Name_first])
+WHERE [Name_first] LIKE '%[/\+*;:)(@_,?#=}{]%';
+GO
