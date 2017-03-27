@@ -16,6 +16,26 @@ Begin
 End;
 GO
 
+-- Function dbo.RemoveTrailingNonAlphabet
+IF OBJECT_ID('[dbo].[RemoveTrailingNonAlphabet]') IS NOT NULL
+   DROP FUNCTION [dbo].[RemoveTrailingNonAlphabet];
+GO
+Create Function [dbo].[RemoveTrailingNonAlphabet](@Temp VarChar(100))
+Returns VarChar(100)
+AS
+Begin
+	Declare @KeepValues as varchar(50)
+	Set @KeepValues = '%[^A-Z]'
+	While PatIndex(@KeepValues, @Temp) > 0
+    	Set @Temp = Stuff(@Temp, PatIndex(@KeepValues, @Temp), 1, '') 
+	Return @Temp
+End;
+GO
+
+
+
+
+
 -- Remove MR. , MRS. , MS. from fist-name --
 --------------------------------------------
 select top 1000 cn_name_1st,stuff(cn_name_1st,1,4,'')
