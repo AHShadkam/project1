@@ -114,9 +114,9 @@ WHERE [Name_first] LIKE '%[/\+*;:)(@_,?#=}{]%';
 GO
 
 
--- 1) First name:
+-- 2) First name:
 
--- 1.1) Remove MR. , MRS. , MS. from last-name 
+-- 2.1) Remove MR. , MRS. , MS. from last-name 
 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
 SET [Name_last] = stuff([Name_last],1,4,'')
@@ -131,24 +131,24 @@ FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
 where [Name_last] like 'MRS.%';
 GO
 
--- 1.2) Remove leading non-alphabets from last-name 
+-- 2.2) Remove leading non-alphabets from last-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_last] = dbo.dbo.RemoveLeadingNonAlphabet([Name_last])
 WHERE [Name_last] LIKE '[^A-Z]%';
 GO
--- 1.3) Remove trailing non-alphabets from last-name 
+-- 2.3) Remove trailing non-alphabets from last-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_last] = dbo.dbo.RemoveTrailingNonAlphabet([Name_last])
 WHERE [Name_last] LIKE '%[^A-Z]';
 GO
 
--- 1.4) Remove digits from last-name 
+-- 2.4) Remove digits from last-name 
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_last] = dbo.dbo.RemoveDigitCharacters([Name_last])
 WHERE [Name_last] LIKE '%[0-9]%';
 GO
 
--- 1.5) Remove special characters except &'. from last-name
+-- 2.5) Remove special characters except &'. from last-name
 UPDATE [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR] 
 SET [Name_last] = dbo.RemoveSpecialCharacters([Name_last])
 WHERE [Name_last] LIKE '%[/\+*;:)(@_,?#=}{]%';
