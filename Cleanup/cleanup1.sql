@@ -67,7 +67,7 @@ Returns VarChar(100)
 AS
 Begin 
 	Declare @KeepValues as varchar(50)
-	Set @KeepValues = '%[ÿ/\+*;:)(@_,?#=}{]%'
+	Set @KeepValues = '%[$%|!ÿ/\+*;:)(@_,?#=}{]%'
 	/** hyphen, caret and ] are tricky
     	hyphen should be always after [ or before ]  **/
 	While PatIndex(@KeepValues, @Temp) > 0
