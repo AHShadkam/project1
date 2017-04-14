@@ -1,3 +1,5 @@
+-- Remove special characters including ( ÿ ) except "&", "'", ".", "-", space 
+
 USE [CustomerID];
 GO
 
