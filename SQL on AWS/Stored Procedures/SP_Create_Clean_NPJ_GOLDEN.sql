@@ -1,7 +1,7 @@
 USE [CustomerID]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_CLEANING_GOLDEN]    Script Date: 04/12/2017 17:23:06 ******/
+
 SET ANSI_NULLS ON
 GO
 
@@ -10,17 +10,7 @@ GO
 
 
 
-CREATE PROCEDURE [dbo].[SP_CLEANING_GOLDEN]
-
-/****************************************************************************************
-    Purpose           :   This procedure is used to clean the Golden table 
-
-    Sample Calls:     :    EXEC SP_CLEANING_GOLDEN
-
-    History           :   Date        Author             Project      Description
-                          02/17/2017	ldap_id(ajain14)	SHS_CDI	    This is for cleaning 
-*****************************************************************************************/
-
+CREATE PROCEDURE [dbo].[SP_Create_CLEAN_NPJ_GOLDEN]
 
 AS
 
@@ -32,8 +22,8 @@ AS
 
     BEGIN TRANSACTION [Tran1]
 
-IF OBJECT_ID('[CustomerID].[dbo].[GR_MIT_AB]','U') IS NOT NULL DROP TABLE [CustomerID].[dbo].[GR_MIT_AB];
-GO
+--IF OBJECT_ID('[CustomerID].[dbo].[GR_MIT_AB]','U') IS NOT NULL DROP TABLE [CustomerID].[dbo].[GR_MIT_AB];
+--GO
      
 CREATE TABLE [CustomerID].[dbo].[GR_MIT_AB]
 (
@@ -136,4 +126,4 @@ FROM dbo.NPJXTCN_MIT_AB        -- This table name should be same as golden trivi
     ROLLBACK TRANSACTION [Tran1]
   END CATCH
 
-GO
+--GO
