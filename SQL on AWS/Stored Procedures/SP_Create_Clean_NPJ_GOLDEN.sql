@@ -1,4 +1,4 @@
-USE [CustomerID]
+USE [CustomerID];
 GO
 
 
