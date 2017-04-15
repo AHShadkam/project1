@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[Amir_Assoc_speed_test]
+CREATE PROCEDURE [dbo].[SP_Associations]
 
 AS
 BEGIN
