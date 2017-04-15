@@ -13,11 +13,6 @@ BEGIN
 	Declare @start_time VARCHAR(50) 
 	SET @start_time = 'Start Time = ' +CONVERT(VARCHAR, Getdate(),120)
 
--- Clean start and trail spaces from Address_number --
-update [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
-set [Address_number] = LTRIM(RTRIM([Address_number]))
-where [address_line2_extracted_flag] = 1
-
 
 -- house holding Name + Address --    
 ;WITH HH AS(
@@ -26,7 +21,7 @@ SELECT
   ,MIN(Cust_no) OVER (PARTITION BY Name_last+ Address_number+ Address_Zip_1) AS HH_ID
   ,Name_last+Address_number+Address_Zip_1 AS combination
 FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
-WHERE LEN(Name_last)!=0
+WHERE LEN(Name_last) > 1
 AND LEN(Address_number)!=0 
 AND LEN(Address_ZIP_1) !=0
 )
@@ -47,7 +42,7 @@ SELECT
   MIN(Cust_no) OVER (PARTITION BY Name_last+'^'+Name_first + Address_number+ Address_Zip_1) AS IND_ID,
   Name_last+ Name_first +Address_number+Address_Zip_1 AS combination
 FROM [CustomerID].[dbo].[NPJXTCN_GOLDEN_NJ_AMIR]
-WHERE LEN(Name_last)!=0
+WHERE LEN(Name_last) > 1
 AND LEN(Name_first)!=0
 AND LEN(Address_number)!=0
 AND LEN(Address_ZIP_1) !=0
@@ -372,6 +367,6 @@ WHILE @rowcount !=0
 		Where T1.Assoc_HH_Rec_1 != T2.Assoc_HH_Rec_1
 	    );
 		           
-	END;
+	END;   -- END WHILE
 
 END
