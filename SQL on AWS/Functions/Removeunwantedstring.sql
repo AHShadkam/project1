@@ -12,10 +12,10 @@ Returns VarChar(100)
 AS
 Begin
 	
-	Set @Temp = LTRIM(RTRIM(replace(replace(replace(
+	Set @Temp = UPPER(LTRIM(RTRIM(replace(replace(replace(
 		dbo.RemoveTrailingNonAlphabet(dbo.RemoveLeadingNonAlphabet(
 		replace(replace(replace(dbo.RemoveDigitCharacters(dbo.RemoveSpecialCharacters(
-		@Temp)),'MR.',''),'MS.',''),'MRS.',''))),' ','<>'),'><',''),'<>',' ')))
+		@Temp)),'MR.',''),'MS.',''),'MRS.',''))),' ','<>'),'><',''),'<>',' '))))
 						
 	Return @Temp
 End;
