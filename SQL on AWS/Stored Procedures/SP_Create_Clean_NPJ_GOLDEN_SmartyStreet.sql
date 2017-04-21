@@ -66,7 +66,7 @@ GO
 	LTRIM(RTRIM([cn_name_suff])) AS Name_suffix,
 	LTRIM(RTRIM([cn_house_rte_no]))+'^'+LTRIM(RTRIM([cn_street_pfx]))+'^'+LTRIM(RTRIM([cn_street_nme]))+
 	'^'+ LTRIM(RTRIM([cn_street_sfx]))+'^'+LTRIM(RTRIM([cn_street_sfx_md]))+'^'+LTRIM(RTRIM([cn_town]))+
-	LTRIM(RTRIM([cn_st_prov]))+'^'+LTRIM(RTRIM([cn_zip_pc]))+'^'+LTRIM(RTRIM([cn_zip_sector_seg]))
+	'^'+ LTRIM(RTRIM([cn_st_prov]))+'^'+LTRIM(RTRIM([cn_zip_pc]))+'^'+LTRIM(RTRIM([cn_zip_sector_seg]))
 	AS NPJ_Address,
 	LTRIM(RTRIM([SmartyStreet_StreetNumber])) AS Address_number,
 	LTRIM(RTRIM([SmartyStreet_Street_Prefix])) AS Address_Street_Prefix,
