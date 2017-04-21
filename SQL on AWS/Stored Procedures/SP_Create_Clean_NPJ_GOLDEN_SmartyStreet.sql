@@ -23,41 +23,7 @@ GO
 	--IF OBJECT_ID('[CustomerID].[dbo].[GR_MIT_AB]','U') IS NOT NULL DROP TABLE [CustomerID].[dbo].[GR_MIT_AB];
 	--GO
 	     
-	CREATE TABLE [CustomerID].[dbo].[GR_MIT_C]
-	(
-	      Cust_no int NOT NULL,
-	      Name_prefix varchar(4),
-	      Name_last varchar(30),
-	      Name_first varchar(30),
-	      Name_suffix varchar(4),
-	      NPJ_Address varchar(100),
-	      Address_number varchar(10),
-	      Address_Street_Prefix varchar(2),
-	      Address_Street_Name varchar(30),
-	      Address_Street_Suffix varchar(4),
-	      Address_Street_Modifier varchar(2),
-	      Address_BoxNubmer varchar(10),
-	      Address_UnitNumber varchar(6),
-	      Address_Line2 varchar(30),
-	      Address_City varchar(30),
-	      Address_State varchar(2),
-	      Address_ZIP_1 varchar(6),
-	      Address_ZIP_2   varchar(6),
-	      CN_date_effect date,
-	      CN_last_name_chg_dt date,
-	      CN_purge_dt date,
-	      Email_Primary varchar(50),
-	      Email_Secondary varchar(50),
-	      Email_Ins_ts datetime2,
-	      Phone_Primary varchar(10),
-	      Phone_Secondary varchar(10),
-	      Assoc_Ind_Rec int,
-	      Assoc_Ind_Rec_1 int,
-	      Assoc_HH_Rec int,
-	      Assoc_HH_Rec_1 int,
-	      SmartyStreet_Property_Type varchar(15),
-		  SmartyStreet_Definition varchar(40)
-	);
+	
 	
 	INSERT INTO [CustomerID].[dbo].[GR_MIT_C]
 	(
