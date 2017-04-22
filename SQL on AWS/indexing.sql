@@ -1,0 +1,2 @@
+CREATE CLUSTERED INDEX IX_MIT_AB_cust
+  ON dbo.GR_MIT_AB (Cust_no);  
